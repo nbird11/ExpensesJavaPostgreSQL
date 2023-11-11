@@ -43,29 +43,32 @@ public class Program {
      * @param args
      */
     public static void main(String[] args) {
-        // CSVInteractor.InitFile();
+        DBInteractor.initDB();
         displayTitle();
         if (DBInteractor.connect() == null) {
-            System.out.println("Problem connecting to transactions database. Exiting.");
             System.exit(1);
         }
         while (true) {
             switch (getAction()) {
+                // Print all data
                 case 1:
-                    // CSVInteractor.DisplayData();
                     DBInteractor.displayData();
                     break;
+                // Add expense record
                 case 2:
-                    // CSVInteractor.AddExpense();
+                    DBInteractor.addRecord(true);
                     break;
+                // Add income record
                 case 3:
-                    // CSVInteractor.AddIncome();
+                    DBInteractor.addRecord();
                     break;
+                // Print monthly insights
                 case 4:
-                    // CSVInteractor.GetInsights();
+                    DBInteractor.getInsights();
                     break;
+                // Print monthly tithing
                 case 5:
-                    // CSVInteractor.GetTithing();
+                    DBInteractor.getInsights(true);
                     break;
                 case 0:
                     System.exit(0);

@@ -1,18 +1,16 @@
-// import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatter;
 
 public class Constants {
-    // windows32 file path
-    public static String CSVFILEPATH = System.getenv("LOCALAPPDATA")
-            + "\\expenses.csv";
+    // Database name
+    public static final String DBNAME = "transactions";
 
-    // .csv file header
-    public static String[] HEADINGS = new String[] { "Date", "Debit", "Credit", "Where", "Account", "Description" };
+    // Table name
+    public static final String TABLENAME = "records";
 
-    // // .csv date format
-    // public static DateTimeFormatter DEFAULTFORMATTER =
-    // DateTimeFormatter.ofPattern("M-d-yyyy");
+    // Column labels
+    public static final String[] HEADINGS = new String[] { "Date", "Debit", "Credit", "Where", "Account",
+            "Description" };
 
-    // display pattern for LocalDates
-    public static String FORMATPATTERN = "MMM-d-yyyy";
-
+    // Display pattern for LocalDates
+    public static final DateTimeFormatter FORMATPATTERN = DateTimeFormatter.ofPattern("MMM d, yyyy");
 }
