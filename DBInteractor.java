@@ -10,9 +10,18 @@ public class DBInteractor {
     private static final String user = "postgres";
     private static final String password = "Nathanis!1post";
 
+    /**
+     * Establishes a connection with the local PostgreSQL server in order to verify
+     * aspects of the {@code transactions} database.
+     * <p>
+     * Checks if the database already exists then creates it if not.
+     * <p>
+     * Checks if database has the {@code records} table then creates it if not.
+     */
     public static void initDB() {
         Connection conn = null;
         try {
+            // Default connection to PostgreSQL server.
             conn = DriverManager.getConnection(url, user, password);
 
             // Check if the database is already initialized.
@@ -38,6 +47,7 @@ public class DBInteractor {
 
             // Check if database has `records` table.
             try {
+                // Connection to `transactions` database now that it is gauranteed to exist
                 conn = connect();
                 PreparedStatement stmt = conn
                         .prepareStatement("SELECT table_name FROM information_schema.tables WHERE table_name = '"
@@ -67,6 +77,16 @@ public class DBInteractor {
         }
     }
 
+    /**
+     * Creates a connection to the local PostgreSQL server and returns the
+     * Connection object.
+     * 
+     * @return {@code Connection} - The PostgreSQL connection to
+     *         {@code transactions} database;
+     *         <p>
+     *         {@code null} if unable to establish
+     *         connection.
+     */
     public static Connection connect() {
         Connection conn = null;
         try {
@@ -80,6 +100,9 @@ public class DBInteractor {
         return conn;
     }
 
+    /**
+     * Gets all rows of record data from the database and displays it to the user.
+     */
     public static void displayData() {
         Connection cn = connect();
         try {
@@ -113,10 +136,23 @@ public class DBInteractor {
         }
     }
 
+    /**
+     * Adds an income record to the {@code records} table of the database.
+     * <p>
+     * Default {@code addRecord} function with {@code boolean expense} argument set
+     * to {@code false}.
+     */
     public static void addRecord() {
         addRecord(false);
     }
 
+    /**
+     * Gets values for a new row from the user and inserts them into the
+     * {@code records} table.
+     * 
+     * @param expense - Type of record to add: expense record if {@code true};
+     *                income if {@code false}.
+     */
     public static void addRecord(boolean expense) {
         String[] record = new String[6];
 
@@ -154,10 +190,23 @@ public class DBInteractor {
         }
     }
 
+    /**
+     * Gets month and year from user and displays cash flow insights for that date
+     * range.
+     * <p>
+     * Default {@code getInsights} function with {@code boolean tithing} argument
+     * set to {@code false}.
+     */
     public static void getInsights() {
         getInsights(false);
     }
 
+    /**
+     * Gets month and year from user to get insights for.
+     * 
+     * @param tithing - Display tithing insights if {@code true}; regular insights
+     *                if {@code false}.
+     */
     public static void getInsights(boolean tithing) {
         System.out.print("Enter month you want insights for as a number (1-12):\n> ");
         int insightMonth = Integer.parseInt(System.console().readLine());
