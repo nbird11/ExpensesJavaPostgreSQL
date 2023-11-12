@@ -14,7 +14,7 @@ future work I might be doing.
 
 Link to YouTube demonstration:
 
-[Expense Tracker - Demo](.)
+[Expense Tracker JDBC PostgreSQL - Demo](https://youtu.be/n8u5SfMi4Ik)
 
 ## Relational Database
 
